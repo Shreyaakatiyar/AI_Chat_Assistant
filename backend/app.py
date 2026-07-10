@@ -11,7 +11,12 @@ client = genai.Client(
 )
 
 app = Flask(__name__)
-CORS(app)
+
+CORS(app, origins=[
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://your-frontend.vercel.app" 
+])
 
 @app.route("/")
 def home():
