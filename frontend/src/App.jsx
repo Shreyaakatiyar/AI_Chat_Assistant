@@ -53,7 +53,7 @@ function App() {
             {msg.text}
           </div>
         ))}
-        {loading && <div className="message bot">Typing...</div>}
+        {loading && <div className="message bot">Thinking...</div>}
       </div>
 
       <div className="input-container">

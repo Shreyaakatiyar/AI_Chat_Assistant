@@ -5,7 +5,6 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-print(os.getenv("GEMINI_API_KEY"))
 
 client = genai.Client(
     api_key=os.getenv("GEMINI_API_KEY")
@@ -41,4 +40,4 @@ def chat():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)
