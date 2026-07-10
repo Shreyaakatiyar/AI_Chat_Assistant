@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Paperclip, Send, Copy, ThumbsUp, RotateCw, Bot } from "lucide-react";
 import "./App.css";
+import ReactMarkdown from "react-markdown";
 
 function App() {
   const [message, setMessage] = useState("");
@@ -90,7 +91,11 @@ function App() {
 
             <div className="message-block">
               <div className={`message-bubble ${msg.role}`}>
-                {msg.text}
+                {msg.role === "bot" ? (
+                  <ReactMarkdown>{msg.text}</ReactMarkdown>
+                ) : (
+                  msg.text
+                )}
               </div>
 
               {msg.role === "bot" && (
@@ -139,15 +144,13 @@ function App() {
             onKeyDown={handleKeyDown}
             disabled={loading}
           />
-          <button
-            className="send-btn"
-            onClick={handleSend}
-            disabled={loading}
-          >
+          <button className="send-btn" onClick={handleSend} disabled={loading}>
             <Send size={16} />
           </button>
         </div>
-        <p className="disclaimer">AI can make mistakes. Verify important information.</p>
+        <p className="disclaimer">
+          AI can make mistakes. Verify important information.
+        </p>
       </div>
     </div>
   );

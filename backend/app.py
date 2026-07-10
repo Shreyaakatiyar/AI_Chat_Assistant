@@ -25,7 +25,7 @@ def chat():
         user_message = data.get("message", "")
 
         response = client.models.generate_content(
-            model="gemini-3.5-flash",
+            model="gemini-3.1-flash-lite",
             contents=user_message
         )
 
@@ -34,6 +34,11 @@ def chat():
         })
 
     except Exception as e:
+        error_str = str(e)
+        if "RESOURCE_EXHAUSTED" in error_str or "429" in error_str:
+            return jsonify({
+                "error": "Rate limit reached. Please wait a moment and try again."
+            }), 429
         return jsonify({
             "error": str(e)
         }), 500
